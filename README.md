@@ -1,5 +1,7 @@
 # かな入力方式の開発を支援する kana_arranger
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mobitan/kana_arranger/master)
+
 kana_arranger は、独自の日本語入力方式（かな入力やローマ字入力など）を開発する人のための Python ライブラリです。
 kana_arranger を使うと、次のことを行うプログラムを簡単に書くことができます。
 
@@ -11,8 +13,8 @@ kana_arranger を使うと、次のことを行うプログラムを簡単に書
 
 サンプルとして、次のプログラムが付属します。
 
-- sample/eval.ipynb: ローマ字入力方式を QWERTY キーボードで評価・可視化する Jupyter Notebook
-- sample/2gram.ipynb: コーパスの 2-gram 出現頻度表を表示する Jupyter Notebook
+- eval.ipynb: ローマ字入力方式を QWERTY キーボードで評価・可視化する Jupyter Notebook
+- ~~2gram.ipynb: コーパスの 2-gram 出現頻度表を表示する Jupyter Notebook~~ 未実装
 
 次のコーパスが利用できるようになっています。
 
@@ -21,35 +23,36 @@ kana_arranger を使うと、次のことを行うプログラムを簡単に書
 
 ## クラウドで試してみる
 
-1. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mobitan/kana_arranger/blob/master/sample/eval.ipynb) ←この [Open in Colab] ボタンを押します。しばらく待つと Google Colab ノートブックが起動します。
+1. [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mobitan/kana_arranger/master) ←この [launch binder] ボタンを押します。しばらく待つと mybinder.org のサーバー上で Jupyter が起動します。
+1. eval.ipynb を開きます。
 1. Ctrl+Enter か Shift+Enter を押して、セルを上から順に実行します。
 
-Google Colab は無料で使えますが、ブラウザを閉じて90分経過するとセッションがタイムアウトし、12時間経過するとインスタンスが消えます。
-タイムアウトする前にファイルを Google Drive や GitHub に保存するか、ローカルにインストールした Jupyter を使いましょう。
+mybinder.org は無料で使えますが、ブラウザを閉じて10分経過するとセッションがタイムアウトし、12時間経過するとインスタンスが消えます。
+編集したファイルを残しておきたい場合は、タイムアウトする前にダウンロードするか、ローカルにインストールした Jupyter を使いましょう。
 
 ## ローカルで試してみる
 
 1. [Jupyter をインストールする](https://jupyter.org/install)
 1. `$ git clone https://github.com/mobitan/kana_arranger.git`
 1. `$ cd kana_arranger`
-1. `$ jupyter notebook sample/eval.ipynb`
+1. `$ jupyter notebook eval.ipynb`
 
 ## かな入力方式を定義する
 
 かな入力方式は Transliterator クラスのインスタンスとして定義され、apply メソッドによって かな列を打鍵列に変換します。
 
-単純な入力方式は Transliterator クラスのコンストラクタに名前と変換テーブルを与えるだけで作れます。
+単純な入力方式は Transliterator クラスのコンストラクタに名前と変換テーブルを与えるだけで定義できます。
 次の例は、[ブリ中トロ配列](https://mobitan.hateblo.jp/entry/2020/04/30/233245)の一部を抜き出した入力方式です。
 
     table = {
         'う':'l', 'り':'kj', 'りょ':'mz', 'りょう':'mda', 'ょ':'z'
     }
-    aiueo = ka.Transliterator('buriburi', table)
-    aiueo.apply('りょうり')
+    buriburi = ka.Transliterator('buriburi', table)
+    buriburi.apply('りょうり')
     #=> 'mdakj'
 
 このように、Transliterator クラスの apply メソッドは、かな列を最長一致で区切って打鍵列に変換します。
-上の例では、「り/ょ/う/り」でも「りょ/う/り」でもなく「りょう/り」と区切って "mdakj" に変換します。
+上の例では、かな列「りょうり」を、「り/ょ/う/り」でも「りょ/う/り」でもなく「りょう/り」と区切って、打鍵列 "mdakj" に変換しています。
 
 打鍵列は、次のルールに従う文字列です。
 
@@ -59,7 +62,7 @@ Google Colab は無料で使えますが、ブラウザを閉じて90分経過�
 - シフトキーと文字キーがキーボードのキー（後述）に含まれていること
 
 ローマ字入力は「ん」「っ」の特殊処理が必要となるため最長一致では正しく変換できません。
-こうような入力方式を定義するときは、Transliterator クラスを継承したサブクラスを作り、apply メソッドをでる必要があります。
+こうような複雑な入力方式を定義するときは、Transliterator クラスを継承したサブクラスを作り、apply メソッドを適切に実装する必要があります。
 kana_arranger/transliterator.py を参考に実装してください。
 
 ## キーボードを定義する
@@ -85,7 +88,7 @@ kana_arranger/transliterator.py を参考に実装してください。
         'MNOPSTUV'
     )
 
-コンストラクタの第2引数にキーを任意の順序で羅列します。この順序に合わせて、第3引数に各キーを打つ手、第4引数に各キーをの打つ指、第5引数に各キーの置かれる段、第6引数に各キーの置かれる列をそれぞれ羅列します。手・指・段・列に用いる文字は区別のための符号であって、互いに異なっていれば何でも構いません。
+コンストラクタの第2引数にキーを任意の順序で羅列します。この順序に合わせて、第3引数に各キーを打つ手、第4引数に各キーを打つ指、第5引数に各キーの置かれる段、第6引数に各キーの置かれる列をそれぞれ羅列します。手・指・段・列を表す文字は、互いに異なっていれば何でも構いません。
 
 キーボードのヒートマップを正しく描画するには、次の作業を別途行う必要があります。
 
