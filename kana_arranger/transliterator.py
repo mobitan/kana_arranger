@@ -93,7 +93,7 @@ class Romaji(Transliterator):
         def roman(m):
             return self.lookup(m[0])
         text = re.sub(r'[ぁ-ぢつ-をゔゕゖー、。]+', roman, text) # 「ん」「っ」以外 
-        text = re.sub(r'ん([aeinouyん])', r'nn\1', text)
+        text = re.sub(r'ん(?=[aeinouyん])', r'nn', text)
         text = re.sub(r'っ([bcdfghjkmpqrstvwz])', r'\1\1', text)
         text = re.sub(r'[んっ]+', roman, text)
         return text

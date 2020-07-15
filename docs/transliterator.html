@@ -57,6 +57,7 @@ var table = {
 	"ー": "-",  "、":",",   "。":".",
 };
 
+// 最長一致置換
 function lookup(text) {
 	for (var i = text.length; i > 0; i--) {
 		if (text.slice(0, i) in table) {
@@ -69,9 +70,10 @@ function lookup(text) {
 	return text;
 }
 
+// ローマ字置換（「ん」「っ」を特別扱いする）
 function romanize(text) {
 	text = text.replace(/[ぁ-ぢつ-をゔゕゖー、。]+/g, lookup);
-	text = text.replace(/ん([aeinouyん])/g, "nn$1");
+	text = text.replace(/ん(?=[aeinouyん])/g, "nn");
 	text = text.replace(/っ([bcdfghjkmpqrstvwz])/g, "$1$1");
 	text = text.replace(/[んっ]+/g, lookup);
 	return text;
@@ -80,9 +82,10 @@ function romanize(text) {
 function update() {
 	var textbox1 = document.getElementById("kana");
 	var textbox2 = document.getElementById("roman");
-	var text1 = textbox1.value;
+	var text1 = textbox1.value.replace(/[ァ-ンヴヵヶ]/g, function(c) {
+		return String.fromCharCode(c.charCodeAt(0) - 0x60);
+	});
 	// textbox2.value = lookup(text1);
-	// ローマ字入力では「ん」「っ」を特別扱いするため romanize() を呼ぶ
 	textbox2.value = romanize(text1);
 }
 </script>
