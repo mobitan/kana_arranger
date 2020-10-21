@@ -27,15 +27,20 @@ class Evaluation:
         
     def __str__(self):
         r = \
-        "{:>10} 打鍵\n" \
-        "{:>10} 動作\n" \
-        "{:>10} シフト\n" \
-        "{:>10} 交互\n" \
-        "{:>10} アルペジオ\n" \
-        "{:>10} 同指連続（同段）\n" \
-        "{:>10} 同指連続（1段違い）\n" \
-        "{:>10} 同指連続（2～3段違い）" \
-        .format(self.total, self.act, self.sft, self.alt, self.arp, self.sf[0], self.sf[1], self.sf[2] + self.sf[3])
+        "{:>10} ({:>1.3f}) 打鍵数・打鍵効率\n" \
+        "{:>10} ({:>2.1f}%) 交互\n" \
+        "{:>10} ({:>2.1f}%) アルペジオ\n" \
+        "{:>10} ({:>2.2f}%) 同指連続（同段）\n" \
+        "{:>10} ({:>2.2f}%) 同指連続（1段違い）\n" \
+        "{:>10} ({:>2.2f}%) 同指連続（2～3段違い）" \
+        .format(
+            self.total, self.total / self.corpus.total,
+            self.alt, 100 * self.alt / self.corpus.total,
+            self.arp, 100 * self.arp / self.corpus.total,
+            self.sf[0], 100 * self.sf[0] / self.corpus.total,
+            self.sf[1], 100 * self.sf[1] / self.corpus.total,
+            self.sf[2] + self.sf[3], 100 * (self.sf[2] + self.sf[3]) / self.corpus.total
+        )
         return r
 
     def heatmap(self):

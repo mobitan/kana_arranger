@@ -14,6 +14,7 @@ class Corpus:
     def __init__(self):
         self.src = ''
         self.freq = Counter()
+        self.total = 0
 
     def download_binary(self, url, save_dir=None, save_name=None):
         r = requests.get(url, stream=True)
@@ -71,6 +72,7 @@ class KkcBccwjCore(Corpus):
                 ws = [self.yomi(x) for x in e[1:]]
                 for w in ''.join(ws).split():
                     self.freq[w] += n
+                    self.total += n * len(w)
         # [TODO] 2字連接頻度を計算する場合は、単語またぎの頻度を1.5倍する。
     
     def yomi(self, pair):
