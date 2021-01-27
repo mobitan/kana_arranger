@@ -19,7 +19,7 @@ kana_arranger を使うと、次のことを行うプログラムを簡単に書
 次のコーパスが利用できるようになっています。
 
 - [国立国語研究所 現代日本語書き言葉コーパス](https://pj.ninjal.ac.jp/corpus_center/bccwj/)のうち、人手によるアノテーションが行われたコアデータ（874万字）
-    - を元に作られた、京都大学 学術情報メディアセンター 大規模テキストアーカイブ研究分野のサイトで配布されている[仮名漢字変換用 N-gram](http://www.ar.media.kyoto-u.ac.jp/member/gologo/lm.html#kkc) (kkc-BCCWJCore.tar) に含まれる 3-gram 頻度データ
+    - を元に作られた、京都大学 学術情報メディアセンター 大規模テキストアーカイブ研究分野のサイトで配布されている[仮名漢字変換用 N-gram](http://www.lsta.media.kyoto-u.ac.jp/member/gologo/lm.html#kkc) (kkc-BCCWJCore.tar) に含まれる 3-gram 頻度データ
 
 ## クラウドで試してみる
 
