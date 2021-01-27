@@ -41,7 +41,7 @@ class KkcBccwjCore(Corpus):
     """
     BCCWJコアデータ かな漢字変換用3-gram
     """
-    url = 'http://www.ar.media.kyoto-u.ac.jp/member/gologo/kkc-BCCWJCore.tar'
+    url = 'http://www.lsta.media.kyoto-u.ac.jp/member/gologo/kkc-BCCWJCore.tar'
     # この正規表現にマッチしない記号等を読み飛ばす
     rx0 = re.compile(r'[、。，．々〆〇\u3041-\u30FF\u4E00-\u9FFF]+/([、。ぁ-ろわをんヴー]+)$')
 
