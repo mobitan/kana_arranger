@@ -4,7 +4,8 @@
 
 ## 自作のかな入力方式
 
-- [ブリ中トロ配列 (2020/04/30)](https://mobitan.hateblo.jp/entry/2020/04/30/233245)
+- [ブリ中トロ配列（2022/10/15 版）](https://mobitan.hateblo.jp/entry/2022/11/30/221433)
+- [ブリ中トロ配列（2021/10/23 版）](https://mobitan.hateblo.jp/entry/2021/10/23/144559)
 
 ## 自作の開発ツール
 
@@ -12,17 +13,20 @@
 
 ブリ中トロ配列は以下のツールを使って開発していた。これらの機能を kana_arranger に統合していきたい。
 
-- [キー負担率](https://mobitan.github.io/keyboard-layout-comparison/heatmap.html)
-- [打鍵数の目安](https://mobitan.github.io/keyboard-layout-comparison/freq.html)
+- [頻度表](https://mobitan.github.io/kana_arranger/freq-list.html)
+- [連接頻度表](https://mobitan.github.io/kana_arranger/freq-table-bccwj.html)
+- [キー負担率](https://github.com/mobitan/chutoro/blob/main/tools/loadmap.html)
+- [配列の評価](https://github.com/mobitan/chutoro/blob/main/tools/eval-2gram.html)
 
 ## リンク
 
 ### キー配列の評価
 
+- [Spring Keeb](https://oha-ohashi.github.io/spring-keeb-search/finger/)
 - [keyboard layout analyzer](https://keyboard-analyzer.vercel.app/)
 - [日本語のキーボードレイアウトの比較ツール](https://github.com/esrille/keyboard-layout-comparison)
 
 ### コーパス
 
-- [国立国語研究所 現代日本語書き言葉均衡コーパス (BCCWJ) 「中納言」版データの語彙表](https://pj.ninjal.ac.jp/corpus_center/bccwj/bcc-chu.html)
-- [仮名漢字変換用 N-gram](http://www.ar.media.kyoto-u.ac.jp/member/gologo/lm.html#kkc)
+- [国立国語研究所 現代日本語書き言葉均衡コーパス (BCCWJ) 「中納言」版データの語彙表](https://clrd.ninjal.ac.jp/bccwj/bcc-chu.html)
+- [仮名漢字変換用 N-gram](http://www.ar.media.kyoto-u.ac.jp/member/gologo/lm.html#kkc) （2022年12月現在、ダウンロードできない）
